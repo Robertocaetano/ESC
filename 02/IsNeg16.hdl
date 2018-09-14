@@ -1,0 +1,17 @@
+// This file is part of the materials accompanying the book 
+// "The Elements of Computing Systems" by Nisan and Schocken, 
+// MIT Press. Book site: www.idc.ac.il/tecs
+// File name: projects/01/Or16Way.hdl
+
+/**
+* Determine if a 16-bit number is negative.  out = in[0] or in[1]
+ */
+ 
+CHIP IsNeg16 {
+
+    IN  in[16];
+    OUT out;
+
+    PARTS:
+	And(a=in[15],b=in[15],out=out);
+}
