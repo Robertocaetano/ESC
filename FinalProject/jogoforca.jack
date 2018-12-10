@@ -1,0 +1,221 @@
+class jogoforca {
+    
+   field String solucao;
+   field String letracorreta;
+   field int line;
+   
+   constructor jogoforca new() {
+       
+      var String jogoforca,chute;
+      var int i;
+      var int answerLength;
+      var int aleatorio;
+      var char number;
+      let i = 0;
+      let jogoforca = "Jogo da Forca         Pressione Qualquer Tecla:";
+
+      do Output.printString(jogoforca);
+      let number = Keyboard.readChar();
+      do Random.setSeed(number);
+      let aleatorio = Random.randRange(6);
+if(aleatorio = 1){
+
+let chute = "Cidade:";
+let solucao = "VADUZ";
+
+}
+
+if(aleatorio = 2){
+let chute = "Cientista:";
+let solucao = "TURING";
+
+}
+
+if(aleatorio = 3){
+let chute = "Animal:";
+let solucao = "TEXUGO";
+
+}
+
+if(aleatorio = 4){
+let chute = "Cor:";
+let solucao = "AZUL";
+
+}
+
+if(aleatorio = 5){
+let chute = "Bebida:";
+let solucao = "TEQUILA";
+
+}
+
+if(aleatorio = 6){
+let chute = "Compositor:";
+let solucao = "MOZART";
+
+}
+
+let letracorreta = String.new(solucao.length());
+
+      while(i < (solucao.length()))
+      {
+         let letracorreta = letracorreta.appendChar(219);
+         let i = i+1; 
+      }
+      
+
+
+      do Output.println();
+      do Output.println();
+      do Output.printString(chute);
+      do Output.println();
+      
+      return this;
+   }
+
+//inicia o jogo
+   method void run()
+   {
+      var boolean fimdejogo;
+      var int palavraerrada;
+      var char letra;
+       
+      let palavraerrada = 0;
+      let line = 3; 
+      let fimdejogo = 0;
+      do desenhaposte();
+      
+      while(~(fimdejogo))
+      {
+         do Output.printString(letracorreta);
+         do Output.moveCursor(line,15);
+         let line = line +1;
+         let letra = Keyboard.readChar();
+         do Output.println();
+         
+         if(~(acertouletra(letra)))
+         {
+            if(palavraerrada = 0)
+            {
+               do desenhacabeca();
+            }
+            if(palavraerrada = 1)
+            {
+               do desenhatronco();
+            }
+            if(palavraerrada = 2)
+            {
+               do desenhabracodir();
+            }
+            if(palavraerrada = 3)
+            {
+               do desenhabracoesq();
+            }
+            if(palavraerrada = 4)
+            {
+               do desenhapernadir();
+            }
+            if(palavraerrada = 5)
+            {
+               do desenhapernaesq();
+               do Output.printString("GAME OVER!");
+               let fimdejogo = -1;
+            }
+            let palavraerrada = palavraerrada +1; 
+         }
+         if(ganhou())
+         {
+         do Output.printString(letracorreta);
+         do Output.moveCursor(line,15);
+         let line = line +1;
+         do Output.println();
+            do Output.printString("Parabens voce acertou!");
+            let fimdejogo = -1;
+         }
+      }
+      return;
+   }
+   
+   // acertou
+   method boolean ganhou()
+   {
+      var int i;
+      let i = 0;
+      while(i < letracorreta.length())
+      {
+         if(letracorreta.charAt(i) = 219)
+         {
+            return 0; 
+         }
+         let i = i+1;
+      }
+      return -1; 
+   }
+   
+   //verifica a palavra se esta certa
+   method boolean acertouletra(char letra)
+   { 
+      var int i;
+      let i =0;
+      while(i < solucao.length())
+      {
+         if(letra = solucao.charAt(i))
+         {
+            do letracorreta.setCharAt(i, letra);
+            return -1;
+         }
+         let i=i+1;
+      }
+      return 0;
+   }
+   
+   //configuração padrao
+   method void desenhaposte()
+   { 
+      do Screen.setColor(true);
+      do Screen.drawRectangle(350, 200, 450, 220);
+      do Screen.drawRectangle(395,50,405,200);
+      do Screen.drawRectangle(300,40,405,50);
+      do Screen.drawRectangle(300,40,310,70);
+      return;
+   }
+   
+   //funcoes principais para desenho
+   method void desenhacabeca()
+   {
+      do Screen.drawCircle(305,90,20);
+      return;
+   }
+   method void desenhatronco()
+   {
+      do Screen.drawLine(305,110, 305, 160);
+      return;
+   }
+   method void desenhabracodir()
+   {
+      do Screen.drawLine(305,135, 320, 120);
+      return;
+   }
+
+   method void desenhabracoesq()
+   {
+      do Screen.drawLine(305,135, 290, 120);
+      return;
+   }
+   method void desenhapernadir()
+   {
+      do Screen.drawLine(305,160, 325, 180);
+      return;
+   }
+   method void desenhapernaesq()
+   {
+      do Screen.drawLine(305,160, 285, 180);
+      return;
+   }
+   //retira o objeto da memoria
+   method void dispose()
+   {
+     do Memory.deAlloc(this);
+     return;
+   }
+}

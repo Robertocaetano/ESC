@@ -1,0 +1,12 @@
+class Main
+{
+   function void main()
+   {
+      var jogoforca jogo;
+
+      let jogo = jogoforca.new();
+      do jogo.run();
+      do jogo.dispose();
+      return;
+   }
+}
